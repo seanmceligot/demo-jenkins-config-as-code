@@ -2,11 +2,9 @@ package scripts
 // Initializes the Development folder, which is fully configurable by the user
 
 import groovy.io.FileType
-import com.synopsys.arc.jenkins.plugins.ownership.OwnershipDescription
 import io.jenkins.systemgroovy.plugins.PipelineHelper
 import jenkins.model.Jenkins
 import com.cloudbees.hudson.plugins.folder.Folder
-import org.jenkinsci.plugins.ownership.model.folders.FolderOwnershipHelper
 
 println("=== Initialize the Demo folder")
 if (Jenkins.instance.getItem("Demo") != null) {
@@ -17,7 +15,6 @@ if (Jenkins.instance.getItem("Demo") != null) {
 // Admin owns the root Development folder
 def demoFolder = Jenkins.instance.createProject(Folder.class, "Demo")
 demoFolder.description = "Demo Pipeline jobs"
-FolderOwnershipHelper.setOwnership(demoFolder, new OwnershipDescription(true, "user"))
 
 // Create a library for local Jenkins Pipeline Library Development
 // if the Env Var is set and the directory is mapped

@@ -10,7 +10,6 @@ RUN /usr/local/bin/download-and-check-updates.sh < /usr/share/jenkins/ref/plugin
 COPY init_scripts/src/main/groovy/ /usr/share/jenkins/ref/init.groovy.d/
 
 # TODO: It should be configurable in "docker run"
-ARG DEV_HOST=192.168.101.57
 ARG CREATE_ADMIN=true
 # If false, only few runs can be actually executed on the master
 # See JobRestrictions settings

@@ -7,12 +7,19 @@ import org.jenkinsci.plugins.authorizeproject.strategy.TriggeringUsersAuthorizat
 
 boolean createAdmin = Boolean.getBoolean("io.jenkins.dev.security.createAdmin")
 
+def generator = { String alphabet, int n ->
+  new Random().with {
+    (1..n).collect { alphabet[ nextInt( alphabet.length() ) ] }.join()
+  }
+}
+passwd = generator( (('A'..'Z')+('a'..'z')+('0'..'9')).join(), 16 )
+
+println("admin login: "+passwd)
 println("=== Configuring users")
+
 def securityRealm = Jenkins.instance.getSecurityRealm()
-User user = securityRealm.createAccount("user", "user")
-user.setFullName("User")
 if (createAdmin) {
-    User admin = securityRealm.createAccount("admin", "admin")
+    User admin = securityRealm.createAccount("admin", passwd)
     admin.setFullName("Admin")
 }
 
